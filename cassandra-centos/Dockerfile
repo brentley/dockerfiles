@@ -44,10 +44,9 @@ ADD files/cassandra-standalone.sh /usr/local/sbin/
 # http://www.datastax.com/documentation/cassandra/2.0/cassandra/install/installRHEL_t.html
 ADD files/datastax.repo /etc/yum.repos.d/
 
-#RUN echo "priority=5" >> /etc/yum.repos.d/libselinux.repo
 RUN /bin/bash -c "if [ -f /etc/yum.repos.d/libselinux.repo ]; then echo 'priority=5' >> /etc/yum.repos.d/libselinux.repo; fi"
 
-RUN yum install -y puppet supervisor
+RUN yum install -y supervisor
 RUN yum install -y jna
 ADD files/supervisord_tomcat.sh /usr/local/sbin/
 RUN chmod 0755 /usr/local/sbin/supervisord_tomcat.sh
@@ -73,7 +72,7 @@ RUN yum install -y dsc20 cassandra20 opscenter
 #### Compile Priam using the Java7 container first
 ####
 
-#### 
+####
 #### Deploy Priam.war to Tomcat
 ####
 
@@ -173,6 +172,3 @@ EXPOSE 8888 7000 7001 7199 9042 9160 61620 61621
 #### If you list more than one CMD then only the last CMD will take effect.
 ####
 CMD ["/usr/bin/supervisord"]
-
-
-
